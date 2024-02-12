@@ -15,11 +15,13 @@
         <option>Spectre</option>
     </select></tr>
     <tr><td><label for="antall">Antall biletter:</label></td>
-    <td><input type="number" min="0" max="10" id="antall"></td></tr>
+    <td><input type="number" min="0" max="10" id="antall" onchange="valideringFornavn()"></td></tr>
     <tr><td><label for="fornavn">Fornavn:</label></td>
-    <td><input type="text" id="fornavn" ></td></tr>
+    <td><input type="text" id="fornavn" ></td>
+    <td id="feilmeldingFornavn"></td></tr>
     <tr><td><label for="etternavn">Etternavn:</label></td>
-        <td><input type="text" id="etternavn"></td></tr>
+        <td><input type="text" id="etternavn" onchange="valideringEtternavn()"></td>
+    <td id="feilmeldingEtternavn"></td></tr>
     <tr><td><label for="nummer">Telefonnummer:</label></td>
         <td><input type="number" min="10000000" max="99999999" id="nummer" onchange="valideringNummer()"></td>
         <td id="feilmeldingNummer"></td></tr>
