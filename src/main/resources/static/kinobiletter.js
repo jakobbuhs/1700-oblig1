@@ -57,13 +57,17 @@ function valideringNummer(){
     }
 }
 function valideringBillett(){
-    let billett = Number(document.getElementById("antall"));
-    if(billett===0){
+    let billett = Number(document.getElementById("antall").value);
+    console.log(billett)
+    if(billett === 0){
         document.getElementById("feilmeldingAntall").innerHTML = "Du må huske å skrive inn hvor mange dere skal være!";
         return false;}
-    else{
+    else if(billett >0 && billett<11){
         document.getElementById("feilmeldingAntall").innerHTML = "";
-        return true
+        return true;
+    }
+    else{
+        return false;
     }
 }
 function billettKjop(){
