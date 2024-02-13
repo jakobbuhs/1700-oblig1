@@ -15,9 +15,10 @@
         <option>Spectre</option>
     </select></tr>
     <tr><td><label for="antall">Antall biletter:</label></td>
-    <td><input type="number" min="0" max="10" id="antall" onchange="valideringFornavn()"></td></tr>
+    <td><input type="number" min="0" max="10" id="antall" onchange="valideringBillett()"></td>
+    <td id="feilmeldingAntall"></td></tr>
     <tr><td><label for="fornavn">Fornavn:</label></td>
-    <td><input type="text" id="fornavn" ></td>
+    <td><input type="text" id="fornavn" onchange="valideringFornavn()"></td>
     <td id="feilmeldingFornavn"></td></tr>
     <tr><td><label for="etternavn">Etternavn:</label></td>
         <td><input type="text" id="etternavn" onchange="valideringEtternavn()"></td>
@@ -28,7 +29,7 @@
     <tr><td><label for="epost">Epost:</label></td>
         <td><input type="email" id="epost" onchange="valideringEpost()"></td>
         <td id="feilmeldingEpost"></td></tr>
-    <tr><td><button onclick="billettKjop()">Kjøp billett</button></td></tr>
+    <tr><td><button onclick="billettKjop(), valideringFornavn(), valideringBillett(), valideringEtternavn(), valideringEpost(), valideringNummer()">Kjøp billett</button></td></tr>
 </table>
 <h2>Alle billetter</h2>
 <div id="billetter"></div>
