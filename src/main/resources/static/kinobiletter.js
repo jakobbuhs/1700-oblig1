@@ -1,69 +1,68 @@
 
 let liste = [];
 function valideringEpost() {
-    let epost = document.getElementById("epost").value;
+    let epost = $("#epost").val();
     if(epost===""){
-        document.getElementById("feilmeldingEpost").innerHTML = "Du må huske å skrive inn eposten din!";
+        $("#feilmeldingEpost").html("Du må huske å skrive inn eposten din!");
         return false;}
     else if(epost.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-        document.getElementById("feilmeldingEpost").innerHTML = "";
+        $("#feilmeldingEpost").html("");
         return true;
     }else {
-        document.getElementById("feilmeldingEpost").innerHTML = "Du har skrevet inn en ugyldig epost";
+        $("#feilmeldingEpost").html("Du har skrevet inn en ugyldig epost");
         return false;
     }
 }
 function valideringFornavn(){
-    let fornavn = document.getElementById("fornavn").value;
+    let fornavn = $("#fornavn").val();
     if(fornavn===""){
-        document.getElementById("feilmeldingFornavn").innerHTML = "Du må huske å skrive inn fornavnet ditt!";
+        $("#feilmeldingFornavn").html("Du må huske å skrive inn fornavnet ditt!");
         return false;
     }
     else if(/\d/.test(fornavn)
     ){
-        document.getElementById("feilmeldingFornavn").innerHTML = "Du har tall i fornavnet ditt.";
+        $("#feilmeldingFornavn").html("Du har tall i fornavnet ditt.");
         return false;
     }else{
 
-        document.getElementById("feilmeldingFornavn").innerHTML = "";
+        $("#feilmeldingFornavn").html("");
         return true;
     }
 }
 function valideringEtternavn(){
-    let etternavn = document.getElementById("fornavn").value;
+    let etternavn = $("#fornavn").val();
     if(etternavn===""){
-        document.getElementById("feilmeldingEtternavn").innerHTML = "Du må huske å skrive inn etternavnet ditt!";
+        $("#feilmeldingEtternavn").html("Du må huske å skrive inn etternavnet ditt!");
         return false;}
     if(/\d/.test(etternavn)){
-        document.getElementById("feilmeldingEtternavn").innerHTML = "Du har tall i etternavnet ditt.";
+        $("#feilmeldingEtternavn").html("Du har tall i etternavnet ditt.");
         return false;
 
     }else{
-        document.getElementById("feilmeldingEtternavn").innerHTML = "";
+        $("#feilmeldingEtternavn").html("");
         return true;
     }
 }
 function valideringNummer(){
-    let nummer = Number(document.getElementById("nummer").value);
+    let nummer = Number($("#nummer").val());
     if(nummer===0){
-        document.getElementById("feilmeldingNummer").innerHTML = "Har du kanskje glemt å skrive inn nummeret ditt?!";
+        $("#feilmeldingNummer").html("Har du kanskje glemt å skrive inn nummeret ditt?!");
         return false;}
     if(10000000 < nummer && nummer < 99999999){
-        document.getElementById("feilmeldingNummer").innerHTML = ""
+        $("#feilmeldingNummer").html("");
         return true;
     }else {
-        document.getElementById("feilmeldingNummer").innerHTML = "Du har skrevet inn et ugyldig telefonnummer.";
+        $("#feilmeldingNummer").html("Du har skrevet inn et ugyldig telefonnummer.");
         return false;
     }
 }
 function valideringBillett(){
-    let billett = Number(document.getElementById("antall").value);
-    console.log(billett)
+    let billett = Number($("#antall").val());
     if(billett === 0){
-        document.getElementById("feilmeldingAntall").innerHTML = "Du må huske å skrive inn hvor mange dere skal være!";
+        $("#feilmeldingAntall").html("Du må huske å skrive inn hvor mange dere skal være!");
         return false;}
     else if(billett >0 && billett<11){
-        document.getElementById("feilmeldingAntall").innerHTML = "";
+        $("#feilmeldingAntall").html("");
         return true;
     }
     else{
@@ -94,12 +93,12 @@ function billettKjop(){
         for (let i of liste){
             ut += i.fornavn_dict + " " + i.etternavn_dict + " Skal se: " + i.film_dict  + " og er totalt " + i.antall_dict + " personer,";
             ut += " Kontakt info: epost: " + i.epost_dict + " tlf: " + i.nummer_dict + "</br>";
-        document.getElementById("billetter").innerHTML = ut;
-        console.log(1)}
+        $("#billetter").html(ut);
+        }
     }
 }
 function slettBilletter(){
     liste = [];
-    document.getElementById("billetter").innerHTML = "";
+    $("#billetter").html("");
 }
 
