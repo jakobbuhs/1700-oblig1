@@ -68,33 +68,6 @@ function valideringBillett(){
         return false;
     }
 }
-/*function billettKjop() {
-
-    if (valideringEpost() && valideringNummer() && valideringFornavn() && valideringEtternavn()) {
-        let fornavn = $("#fornavn").val();
-        let etternavn = $("#etternavn").val();
-        let film = $("#filmer").val();
-        let antall = $("#antall").val();
-        let nummer = $("#nummer").val();
-        let epost = $("#epost").val();
-        const billett = {
-            fornavn_dict: fornavn,
-            etternavn_dict: etternavn,
-            film_dict: film,
-            antall_dict: antall,
-            nummer_dict: nummer,
-            epost_dict: epost
-        };
-        $.post("/lagre", billett, function () {
-            hentAlle();
-        });
-        $("#antall").val("");
-        $("#fornavn").val("");
-        $("#etternavn").val("");
-        $("#nummer").val("");
-        $("#epost").val("");
-    }
-}*/
 function billettKjop(){
     if (valideringEpost() && valideringNummer() && valideringFornavn() && valideringEtternavn()) {
         const billettData = {
@@ -106,13 +79,12 @@ function billettKjop(){
             epost: $("#epost").val()
         };
 
-        $.ajax({
+        $.post({
             url: '/lagre',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(billettData),
             success: function() {
-                alert('Billett lagret');
                 hentAlle(); // Refresh the list of tickets
             },
             error: function() {

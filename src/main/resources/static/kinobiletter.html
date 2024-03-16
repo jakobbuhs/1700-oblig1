@@ -5,10 +5,11 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="kinobiletter.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 <h1>Bestilling av kinobiletter</h1>
-<table>
+<table class="table">
     <tr><td><label for="filmer">Velg film:</label></td>
     <td><select id="filmer">
         <option>Løvenes konge</option>
@@ -30,12 +31,12 @@
     <tr><td><label for="epost">Epost:</label></td>
         <td><input type="email" id="epost" onchange="valideringEpost()"></td>
         <td id="feilmeldingEpost"></td></tr>
-    <tr><td><button onclick="billettKjop(); valideringFornavn(); valideringBillett();valideringEtternavn(); valideringEpost(); valideringNummer()">Kjøp billett</button></td></tr>
+    <tr><td><button class="btn btn-primary" onclick="billettKjop(); valideringFornavn(); valideringBillett();valideringEtternavn(); valideringEpost(); valideringNummer()">Kjøp billett</button></td></tr>
 </table>
 
 <h2>Alle billetter</h2>
 <div id="billetterUt"></div>
-<button onclick="slettBilletter()">Slett billeter</button>
+<button class="btn btn-danger" onclick="slettBilletter()">Slett billeter</button>
 <div id="personRegister"></div>
 </body>
 </html>
