@@ -85,7 +85,7 @@ function billettKjop(){
             contentType: 'application/json',
             data: JSON.stringify(billettData),
             success: function() {
-                hentAlle(); // Refresh the list of tickets
+                hentAlle();
             },
             error: function() {
                 alert('En feil oppstod');
