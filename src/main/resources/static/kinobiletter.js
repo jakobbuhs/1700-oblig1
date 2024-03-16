@@ -1,4 +1,3 @@
-
 let liste = [];
 function valideringEpost() {
     let epost = $("#epost").val();
@@ -69,36 +68,51 @@ function valideringBillett(){
         return false;
     }
 }
-function billettKjop(){
+function billettKjop() {
 
-    if (valideringEpost() && valideringNummer() && valideringFornavn() && valideringEtternavn()){
-        const film = document.getElementById("filmer").value;
-        const antall = document.getElementById("antall").value;
-        const fornavn = document.getElementById("fornavn").value;
-        const etternavn = document.getElementById("etternavn").value;
-        const nummer = document.getElementById("nummer").value;
-        const epost = document.getElementById("epost").value;
-
-
-        let pers = {
+    if (valideringEpost() && valideringNummer() && valideringFornavn() && valideringEtternavn()) {
+        let fornavn = $("#fornavn").val();
+        let etternavn = $("#etternavn").val();
+        let film = $("#filmer").val();
+        let antall = $("#antall").val();
+        let nummer = $("#nummer").val();
+        let epost = $("#epost").val();
+        const billett = {
+            fornavn_dict: fornavn,
+            etternavn_dict: etternavn,
             film_dict: film,
             antall_dict: antall,
-            fornavn_dict: fornavn,
-            etternavn_dict:etternavn,
-            nummer_dict:nummer,
-            epost_dict:epost
-        }
-        liste.push(pers)
-        let ut = "";
-        for (let i of liste){
-            ut += i.fornavn_dict + " " + i.etternavn_dict + " Skal se: " + i.film_dict  + " og er totalt " + i.antall_dict + " personer,";
-            ut += " Kontakt info: epost: " + i.epost_dict + " tlf: " + i.nummer_dict + "</br>";
-        $("#billetter").html(ut);
-        }
+            nummer_dict: nummer,
+            epost_dict: epost
+        };
+        $.post("/lagre", billett, function () {
+            hentAlle();
+        });
+        $("#antall").val("");
+        $("#fornavn").val("");
+        $("#etternavn").val("");
+        $("#nummer").val("");
+        $("#epost").val("");
     }
 }
-function slettBilletter(){
-    liste = [];
-    $("#billetter").html("");
+function hentAlle() {
+    $.get("/hentAlle", function (data) {
+        console.log(data)
+        Ut(data);
+    });
 }
+function Ut(billetter){
+    let ut = "";
+    for (let i in billetter) {
+        ut += billetter[i].fornavn_dict + " " + billetter[i].etternavn_dict + " Skal se: " + billetter[i].film_dict + " og er totalt " + billetter[i].antall_dict + " personer,";
+        ut += " Kontakt info: epost: " + billetter[i].epost_dict + " tlf: " + billetter[i].nummer_dict + "</br>";
+    }
 
+    $("#billetterUt").html(ut);
+
+}
+function slettBilletter(){
+    $.get( "/slettAlle", function() {
+        hentAlle();
+    });
+}
