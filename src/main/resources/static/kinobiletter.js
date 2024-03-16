@@ -97,9 +97,8 @@ function valideringBillett(){
 }*/
 function billettKjop(){
     if (valideringEpost() && valideringNummer() && valideringFornavn() && valideringEtternavn()) {
-        // Collect form data
         const billettData = {
-            film: $("#filmer").val(),
+            filmer: $("#filmer").val(),
             antall: $("#antall").val(),
             fornavn: $("#fornavn").val(),
             etternavn: $("#etternavn").val(),
@@ -107,14 +106,19 @@ function billettKjop(){
             epost: $("#epost").val()
         };
 
-        // Use jQuery's $.post method to send data to the server
-        $.post({
-            url: '/lagre', // Endpoint on your server that handles the ticket saving
+        $.ajax({
+            url: '/lagre',
+            type: 'POST',
+            contentType: 'application/json',
             data: JSON.stringify(billettData),
-            contentType: 'application/json', // Specify the content type
-
+            success: function() {
+                alert('Billett lagret');
+                hentAlle(); // Refresh the list of tickets
+            },
+            error: function() {
+                alert('En feil oppstod');
+            }
         });
-        hentAlle();
     }
 }
 function hentAlle() {
@@ -126,13 +130,12 @@ function hentAlle() {
 function Ut(billetter){
     let ut = "";
     for (let i in billetter) {
-        ut += billetter[i].fornavn_dict + " " + billetter[i].etternavn_dict + " Skal se: " + billetter[i].film_dict + " og er totalt " + billetter[i].antall_dict + " personer,";
-        ut += " Kontakt info: epost: " + billetter[i].epost_dict + " tlf: " + billetter[i].nummer_dict + "</br>";
+        ut += billetter[i].fornavn + " " + billetter[i].etternavn + " Skal se: " + billetter[i].filmer + " og er totalt " + billetter[i].antall + " personer,";
+        ut += " Kontakt info: epost: " + billetter[i].epost + " tlf: " + billetter[i].nummer + "</br>";
     }
-
     $("#billetterUt").html(ut);
-
 }
+
 function slettBilletter(){
     $.get( "/slettAlle", function() {
         hentAlle();
