@@ -68,7 +68,7 @@ function valideringBillett(){
         return false;
     }
 }
-function billettKjop() {
+/*function billettKjop() {
 
     if (valideringEpost() && valideringNummer() && valideringFornavn() && valideringEtternavn()) {
         let fornavn = $("#fornavn").val();
@@ -93,6 +93,28 @@ function billettKjop() {
         $("#etternavn").val("");
         $("#nummer").val("");
         $("#epost").val("");
+    }
+}*/
+function billettKjop(){
+    if (valideringEpost() && valideringNummer() && valideringFornavn() && valideringEtternavn()) {
+        // Collect form data
+        const billettData = {
+            film: $("#filmer").val(),
+            antall: $("#antall").val(),
+            fornavn: $("#fornavn").val(),
+            etternavn: $("#etternavn").val(),
+            nummer: $("#nummer").val(),
+            epost: $("#epost").val()
+        };
+
+        // Use jQuery's $.post method to send data to the server
+        $.post({
+            url: '/lagre', // Endpoint on your server that handles the ticket saving
+            data: JSON.stringify(billettData),
+            contentType: 'application/json', // Specify the content type
+
+        });
+        hentAlle();
     }
 }
 function hentAlle() {
